@@ -19,7 +19,7 @@ public class PlayerInteraction : MonoBehaviour
         interactionRay.origin = playerController.transform.position + Vector3.up * 0.5f;
         interactionRay.direction = playerController.transform.forward;
 
-        if (Physics.Raycast(interactionRay, out RaycastHit hit, playerController.playerProperties.interactDistance, interactableMask))
+        if (Physics.Raycast(interactionRay, out RaycastHit hit, playerController.playerProperties.interactRange, interactableMask))
         {
 
             if(hit.collider != null)

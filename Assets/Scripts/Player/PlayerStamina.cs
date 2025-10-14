@@ -5,15 +5,7 @@ public class PlayerStamina
 {
     public PlayerProperties playerProperties;
     private readonly float maxStamina = 100f;
-    public PlayerStamina(PlayerProperties playerProperties)
-    {
-        this.playerProperties = playerProperties;
-    }
-    public void DecreaseStaminaFill()
-    {
-        playerProperties.stamina -= (int)playerProperties.staminaDrainRate * Time.deltaTime;
-        playerProperties.stamina = Mathf.Max(playerProperties.stamina, 0);
-    }
+    public PlayerStamina(PlayerProperties playerProperties) => this.playerProperties = playerProperties;
     public IEnumerator IncreaseStamina(float recoveryRate, System.Action<float> onResult)
     {
         yield return new WaitForSeconds(1f);
@@ -21,7 +13,7 @@ public class PlayerStamina
         while (playerProperties.stamina < maxStamina)
         {
             // Increase stamina overtime
-            playerProperties.stamina += (int)recoveryRate * Time.deltaTime;
+            playerProperties.stamina += recoveryRate * Time.deltaTime;
             // Clamp the stamina value
             playerProperties.stamina = Mathf.Min(playerProperties.stamina, maxStamina);
             // Update UI in real time
@@ -33,6 +25,7 @@ public class PlayerStamina
     }
     public void Consume(float consumeAmount)
     {
+        if (playerProperties.stamina < 0) return;
         playerProperties.stamina -= consumeAmount;
         playerProperties.stamina = Mathf.Max(playerProperties.stamina, 0f);
     }

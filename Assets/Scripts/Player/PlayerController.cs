@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     #region Player Stats & Player References
     public PlayerProperties playerProperties;
     public PlayerReferences playerReferences;
+    public CameraLensMode cameraLensMode { get; private set; }
     private Coroutine staminaRecoveryCoroutine = null;
     public PlayerEventHandler playerEventHandler { get; private set; }
     public PlayerEventSubscriber playerEventSubscriber { get; private set; }
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         uiManager = UIManager.Instance;
 
         playerReferences.controller = GetComponent<CharacterController>();
+        cameraLensMode = GetComponent<CameraLensMode>();
         playerReferences.cameraTarget = Camera.main.transform;
         playerMovement = new PlayerMovement(playerReferences.controller, playerProperties, playerReferences);
         playerStamina = new PlayerStamina(playerProperties);
@@ -70,12 +72,14 @@ public class PlayerController : MonoBehaviour
     {
         changeState.UpdateState();
 
+        uiManager.DecreaseStaminaBar(playerProperties.stamina); // Update the UI bar fill
+
         float recoveryMultiplier = changeState.CurrentState is PlayerTiredState ? playerProperties.staminaRecoveryRate : 7.5f;
 
         // Start recovering if stamina isn't full and recovery isnt already starting
         if (!playerStamina.IsStaminaFull() && staminaRecoveryCoroutine == null)
         {
-            staminaRecoveryCoroutine = StartCoroutine(playerStamina.IncreaseStamina(recoveryMultiplier, (result) => uiManager.IncreaseStaminaFill(result)));
+            staminaRecoveryCoroutine = StartCoroutine(playerStamina.IncreaseStamina(recoveryMultiplier, (stamina) => uiManager.IncreaseStaminaBar(stamina)));
         }
 
         // If stamina is full and coroutine still running, stop it

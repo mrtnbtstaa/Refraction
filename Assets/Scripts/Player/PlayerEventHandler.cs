@@ -4,10 +4,12 @@ public class PlayerEventHandler
 {
     private TransitionState changeState;
     private PlayerController playerController;
+    private PlayerProperties playerProperties;
     public PlayerEventHandler(PlayerController playerController, TransitionState changeState)
     {
         this.changeState = changeState;
         this.playerController = playerController;
+        playerProperties = playerController.playerProperties;
     }
 
     public void HandleJump()
@@ -40,7 +42,7 @@ public class PlayerEventHandler
 
     public void HandleDash()
     {
-        if (playerController.playerMovement.IsGrounded)
+        if (playerController.playerMovement.IsGrounded && playerController.inputManager.MoveInput != Vector2.zero)
             changeState.To(playerController.dashState);
     }
 
@@ -54,7 +56,7 @@ public class PlayerEventHandler
         
         Ray ray = new(playerController.transform.position + Vector3.up * 0.5f, playerController.transform.forward);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, playerController.playerProperties.interactDistance, LayerMask.GetMask("Interactable")))
+        if (Physics.Raycast(ray, out RaycastHit hit, playerController.playerProperties.interactRange, LayerMask.GetMask("Interactable")))
         {
             playerController.playerProperties.interactableTransform = hit.transform;
             if (playerController.playerProperties.interactableTransform != null)
@@ -68,10 +70,10 @@ public class PlayerEventHandler
 
     }
     
-    public void HandleInteractEnd()
+    public void HandleLensModeToggle()
     {
-        playerController.playerProperties.interactableTransform = null;
-        playerController.playerProperties.isInteractedActive = false;
+        Debug.Log("Handle Lens Mode Activated!");
+        playerController.cameraLensMode.LensModeActivate();
     }
 
 }

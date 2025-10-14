@@ -14,6 +14,7 @@ public class PlayerRunningState : PlayerBaseState
     public override void EnterState()
     {
         playerController.state = this.ToString();
+
     }
 
     public override void ExitState()
@@ -53,8 +54,7 @@ public class PlayerRunningState : PlayerBaseState
     {
         playerMovement.ApplyGravity();
 
-        playerStamina.DecreaseStaminaFill(); // Decrease the stamina overtime
-        playerController.uiManager.DecreaseStaminaFill(playerProperties.stamina);
+        playerStamina.Consume(playerProperties.staminaDrainRate * Time.deltaTime); // Decrease the stamina overtime
 
         if (playerProperties.stamina <= 0f)
         {

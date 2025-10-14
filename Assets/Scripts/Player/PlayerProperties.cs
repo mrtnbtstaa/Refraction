@@ -11,9 +11,8 @@ public class PlayerProperties
     public float groundCheckRadius = 0.1f;
     public float dashDuration = 0.3f;
     public float dashSpeed = 15f;
-    public bool canDoubleJump = false;
-    public float interactDistance = 3f;
     public float smoothMovement = 0.5f;
+    public bool canDoubleJump = false;
 
     [Header("Gravity Settings")]
     public float gravity = -9.81f;
@@ -30,7 +29,11 @@ public class PlayerProperties
     public Transform groundTransformPosition;
     public LayerMask groundInteractableMask;
 
+
     [Header("Interactable Settings")]
     public Transform interactableTransform;
+    public float interactRange = 3f;
     public bool isInteractedActive = false;
+
+   
 }

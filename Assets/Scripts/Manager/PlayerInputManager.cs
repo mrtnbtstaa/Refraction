@@ -12,6 +12,7 @@ public class PlayerInputManager : MonoBehaviour
     public event Action OnSprintEnd;
     public event Action OnInteractStart;
     public event Action OnInteractEnd;
+    public event Action OnLensMode;
     private float sprintPressTime;
     private bool isSprinting;   
     private void Awake()
@@ -49,7 +50,7 @@ public class PlayerInputManager : MonoBehaviour
 
     #endregion
     private void HandleJump(InputAction.CallbackContext context) => OnJump?.Invoke();
-    public bool IsInteract() => inputAction.Player.Interact.WasPressedThisFrame();
+    private void HandleLensMode(InputAction.CallbackContext context) => OnLensMode?.Invoke();
     private void HandleSprintStarted(InputAction.CallbackContext context)
     {
         sprintPressTime = Time.time;
@@ -79,6 +80,7 @@ public class PlayerInputManager : MonoBehaviour
         inputAction.Player.Sprint.canceled += HandleSprintCanceled;
         inputAction.Player.Interact.started += HandleInteractStart;
         inputAction.Player.Interact.canceled += HandleInteractEnd;
+        inputAction.Player.Aim.performed += HandleLensMode;
     }
 
     private void Unsubscribe()
@@ -88,5 +90,6 @@ public class PlayerInputManager : MonoBehaviour
         inputAction.Player.Sprint.canceled -= HandleSprintCanceled;
         inputAction.Player.Interact.started -= HandleInteractStart;
         inputAction.Player.Interact.canceled -= HandleInteractEnd;
+        inputAction.Player.Aim.performed -= HandleLensMode;
     }
 }

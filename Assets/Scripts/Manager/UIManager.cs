@@ -33,8 +33,8 @@ public class UIManager : MonoBehaviour
         interactText.text = "Press [E] to Interact.";
         interactText.gameObject.SetActive(false);
     }
-    public void IncreaseStaminaFill(float stamina) => staminaBar.fillAmount = stamina / maxStamina;
-    public void DecreaseStaminaFill(float stamina) => staminaBar.fillAmount = stamina / maxStamina;
+    public void IncreaseStaminaBar(float stamina) => staminaBar.fillAmount = stamina / maxStamina;
+    public void DecreaseStaminaBar(float stamina) => staminaBar.fillAmount = stamina / maxStamina;
     public void ShowUiText(Vector3 worldPosition)
     {
         if (mainCamera == null) return;
