@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5178513865982914486
+--- !u!114 &-8226667599526776047
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crosshair Mat
-  m_Shader: {fileID: -6465566751694194690, guid: b79014a7889c99c48aee8b6da36dea37, type: 3}
+  m_Name: Scope Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 9b220a87e7727cc42a71ded1e8d14aca, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,8 +37,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Crosshair_Texture:
-        m_Texture: {fileID: 2800000, guid: 854d7f829f99cea4cb4f954ac15afd31, type: 3}
+    - _Texture_Mask:
+        m_Texture: {fileID: 2800000, guid: fcc8411963e190a449101f6922581c37, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,15 +55,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Threshold: 1
-    - _Cell_Density: 3.96
-    - _Noise_Scale: 40.5
-    - _Noise_Strength: 0.22
+    - _Alpha: 1
+    - _AlphaThreshold: 1
+    - _Alpha_Threshold: 0
+    - _Edge_Strength: 0.19
+    - _Fresnel_Power: -0.74
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0.46
     m_Colors:
-    - _Base_Color: {r: 0, g: 56.05615, b: 191.74904, a: 0}
-    - _Secondary_Color: {r: 190.37523, g: 0, b: 220.26175, a: 1}
+    - _Base_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.08663211, g: 0.16981131, b: 0.056870773, a: 1}
+    - _Edge_Color: {r: 13.490196, g: 0, b: 16, a: 0}
+    - _Edge_Strength: {r: -2.76, g: 0.5, b: 0, a: 0}
+    - _Glass_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Hole_Tint_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _SmoothStep_Edge: {r: 0.26, g: 0.33, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

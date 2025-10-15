@@ -16,7 +16,8 @@ public class PlayerInputManager : MonoBehaviour
     public event Action OnSwitchColor;
     private float sprintPressTime;
     private float ePressTime;
-    private bool isSprinting;   
+    private bool isSprinting;
+    public bool isInteracting = false;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -78,12 +79,14 @@ public class PlayerInputManager : MonoBehaviour
     }
     private void HandleInteractEnd(InputAction.CallbackContext context)
     {
-        float pressEDuration = Time.time - ePressTime;
+        float ePressDuration = Time.time - ePressTime;
 
-        if (pressEDuration <= 0.2f)
+        if (ePressDuration <= 0.2f && !isInteracting)
             OnSwitchColor?.Invoke();
         else
-            OnInteractEnd?.Invoke(); 
+            OnInteractEnd?.Invoke();
+
+        isInteracting = false;
     }
     public bool IsRunPressed() => isSprinting;
     public bool IsJumpPressed() => inputAction.Player.Jump.triggered;

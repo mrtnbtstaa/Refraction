@@ -18,6 +18,7 @@ public class PlayerEventSubscriber
         inputManager.OnSprintStart += eventHandler.HandleSprintStart;
         inputManager.OnSprintEnd += eventHandler.HandleSprintEnd;
         inputManager.OnInteractStart += eventHandler.HandleInteractStart;
+        inputManager.OnInteractEnd += eventHandler.HandleInteractEnd;
         inputManager.OnLensMode += eventHandler.HandleLensModeToggle;
         inputManager.OnSwitchColor += eventHandler.HandleSwitchColor;
     }
@@ -28,6 +29,7 @@ public class PlayerEventSubscriber
         inputManager.OnSprintStart -= eventHandler.HandleSprintStart;
         inputManager.OnSprintEnd -= eventHandler.HandleSprintEnd;
         inputManager.OnInteractStart -= eventHandler.HandleInteractStart;
+        inputManager.OnInteractEnd -= eventHandler.HandleInteractEnd;
         inputManager.OnLensMode -= eventHandler.HandleLensModeToggle;
         inputManager.OnSwitchColor -= eventHandler.HandleSwitchColor;
     }

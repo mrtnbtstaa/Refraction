@@ -56,8 +56,12 @@ public class PlayerMovement
         Vector3 relativeForwardMovement = playerMovementInput.z * forwardFlat;
         Vector3 relativeRightMovement = playerMovementInput.x * rightFlat;
 
+        // Combined movement
         Vector3 targetMovementDirection = relativeForwardMovement + relativeRightMovement;
 
+        // Player rotation
+        RotatePlayer(targetMovementDirection);
+        
         float targetSpeed = playerMovementInput.magnitude > 0 ? playerProperties.moveSpeed * moveSpeedMultiplier : 0f;
 
         Vector3 targetVelocity = targetMovementDirection * targetSpeed;
@@ -98,5 +102,13 @@ public class PlayerMovement
 
     public bool IsGrounded => Physics.CheckSphere(playerProperties.groundTransformPosition.position, playerProperties.groundCheckRadius, playerProperties.groundInteractableMask);
     
-    
+    public void RotatePlayer(Vector3 movement)
+    {
+        if (movement == Vector3.zero) return;
+
+        Vector3 direction = new Vector3(movement.x, 0f, movement.z).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+        playerProperties.playerTransform.rotation = Quaternion.Lerp(playerProperties.playerTransform.rotation, targetRotation, playerProperties.rotationSpeed * Time.deltaTime);
+    }
+
 }

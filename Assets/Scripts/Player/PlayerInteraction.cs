@@ -8,7 +8,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float playerFollowSpeed = 3f;
     [SerializeField] private LayerMask interactableMask;
     private Ray interactionRay;
-    private bool isUiActive;
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -24,11 +23,8 @@ public class PlayerInteraction : MonoBehaviour
 
             if(hit.collider != null)
             {
-                if (!isUiActive)
+                if (!playerController.playerProperties.isInteractedActive)
                 {
-                    // Update the flag to true to skip this logic on subsequent frames.
-                    isUiActive = true;
-
                     // Get the hit interactable component
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
 
@@ -38,26 +34,21 @@ public class PlayerInteraction : MonoBehaviour
                     // Get the transform of the currentInteractable
                     playerController.playerProperties.interactableTransform = currentInteractable.transform;
 
+                    // Set the position of the ui 
                     Vector3 topPosition = new Vector3(
                         playerController.playerProperties.interactableTransform.position.x,
                         playerController.playerProperties.interactableTransform.position.y + heightOffset,
                         playerController.playerProperties.interactableTransform.position.z
                     );
+                    // Show the ui text with the set position
                     playerController.uiManager.ShowUiText(topPosition);
-
-                    Debug.Log("Only run once");
-
                 }
             }
         }
         else
         {
-            // Reset the interaction state only if it was active
-            if (isUiActive)
-            {
-                playerController.uiManager.HideUiText();
-                isUiActive = false;
-            }
+            // If no interactable found
+            playerController.uiManager.HideUiText();
             playerController.playerProperties.isInteractedActive = false;
             currentInteractable = null;
             playerController.playerProperties.interactableTransform = null;
@@ -75,10 +66,8 @@ public class PlayerInteraction : MonoBehaviour
 
             //Push the object
             currentInteractable.Push(pushDir);
-
+            
             playerController.playerMovement.Move(playerController.inputManager.MoveInput, playerFollowSpeed);
-            // playerController.playerMovement.Move(pushDir.normalized * playerFollowSpeed * Time.deltaTime);
-            // transform.position += pushDir * playerFollowSpeed * Time.deltaTime
         }
 
     }

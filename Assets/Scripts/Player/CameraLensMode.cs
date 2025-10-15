@@ -21,6 +21,8 @@ public class CameraLensMode : MonoBehaviour
     private void Awake()
     {
         rotationComposer = vCam.gameObject.GetComponent<CinemachineRotationComposer>();
+        SetFloat("_Alpha_Threshold", 0f, scopeLensMaterial);
+        SetFloat("_Alpha_Threshold", 0f, crosshairMaterial);
     }
     public void LensModeActivate()
     {
@@ -47,7 +49,7 @@ public class CameraLensMode : MonoBehaviour
         float startFOV = vCam.Lens.FieldOfView;
         float time = 0f;
 
-        float startAlpha = GetFloat(scopeLensMaterial, "_Alpha_Threshold"); // Current alpha threshold 
+        float startAlpha = GetFloat(scopeLensMaterial, "_Alpha_Threshold"); // Get the current alpha threshold 
         float endAlpha = isLensMode ? 1f : 0f;
 
         while (time < zoomDuration)

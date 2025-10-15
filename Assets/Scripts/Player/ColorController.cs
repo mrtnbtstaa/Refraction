@@ -12,7 +12,7 @@ public class ColorController : MonoBehaviour
     [SerializeField] private Color interiorRed, interiorBlue, interiorGreen, interiorViolet;
     [SerializeField] private float maxChangedTime = 2f;
     private Coroutine colorChangeCoroutine;
-
+    
     private IEnumerator IEUpdateColor(int currentIndex)
     {
         float time = 0;

@@ -13,6 +13,7 @@ public class PlayerProperties
     public float dashSpeed = 15f;
     public float smoothMovement = 0.5f;
     public bool canDoubleJump = false;
+    public float rotationSpeed = 0.5f;
 
     [Header("Gravity Settings")]
     public float gravity = -9.81f;
@@ -28,6 +29,7 @@ public class PlayerProperties
     [Header("References")]
     public Transform groundTransformPosition;
     public LayerMask groundInteractableMask;
+    public Transform playerTransform;
 
 
     [Header("Interactable Settings")]
