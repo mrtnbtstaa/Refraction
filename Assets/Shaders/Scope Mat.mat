@@ -65,7 +65,7 @@ Material:
     m_Colors:
     - _Base_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0.08663211, g: 0.16981131, b: 0.056870773, a: 1}
-    - _Edge_Color: {r: 10.164706, g: 16, b: 0, a: 0}
+    - _Edge_Color: {r: 0, g: 4.7058825, b: 16, a: 1}
     - _Edge_Strength: {r: -2.76, g: 0.5, b: 0, a: 0}
     - _Glass_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Hole_Tint_Color: {r: 1, g: 1, b: 1, a: 0}

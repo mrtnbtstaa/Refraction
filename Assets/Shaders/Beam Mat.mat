@@ -74,18 +74,32 @@ Material:
     - _Beam_Speed: 0.03
     - _Beam_Strength: 1.88
     - _Billboard_Size: 0.99
+    - _Core_Falloff: 0.3
+    - _Core_Spread: 1.06
+    - _Displacement_Strength: 3.6
+    - _Distance: 1.03
+    - _Distance_Position: -0.4
+    - _FallOff: 0.11
     - _Float: 1.46
-    - _Fresnel_Power: 10
-    - _Glow_Intensity: 30
+    - _Fresnel_Power: 5.37
+    - _Glow_Intensity: -0.06
     - _Gradient_Power: 3.22
     - _Inflate: 7.45
-    - _Interior_Spread: 1.87
-    - _Noise_Scale: 75
+    - _Inner_Radius: 2.88
+    - _Interior_Noise_Power: 4.85
+    - _Interior_Power: 8.65
+    - _Interior_Speed: 0.01
+    - _Interior_Spread: -3.38
+    - _Interior_Strength: 5.68
+    - _Noise_Scale: 100
     - _Noise_Strength: 0.45
     - _Normal_Vector_Strength: 0.25
+    - _Outer_Radius: 1.56
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Radius: 0.87
     - _Speed: 0.02
+    - _Spread: 1.83
     - _UV_Pos: 0.5
     - _inflate: 1.06
     m_Colors:
@@ -93,14 +107,21 @@ Material:
     - _Beam_Color: {r: 25.688934, g: 0.5379881, b: 0, a: 1}
     - _Beam_Secondary_Color: {r: 13.766359, g: 3.0992324, b: 0, a: 1}
     - _Beam_Speed: {r: 0.02, g: 0.02, b: 0, a: 0}
-    - _Fresnel_Color: {r: 12.047058, g: 47.937252, b: 2.0078433, a: 0}
-    - _Interior_Color: {r: 1.6415969, g: 4.237095, b: 0, a: 0}
-    - _Interior_Position: {r: 0.68, g: 0, b: 0, a: 0}
+    - _Center_Color: {r: 2.6935892, g: 2.7924528, b: 0.59273773, a: 1}
+    - _Core_Color: {r: 16.888477, g: 28.191792, b: 21.077353, a: 1}
+    - _Core_Position: {r: -0.16, g: -0.06, b: -0.85, a: 0}
+    - _Core_Secondary_Color: {r: 0.40497917, g: 0.46226418, b: 0.17225882, a: 1}
+    - _Fresnel_Color: {r: 12.047058, g: 118.46274, b: 191.74904, a: 0}
+    - _Inner_Color: {r: 0.0013037875, g: 0.0013037875, b: 0.0013037875, a: 1}
+    - _Interior_Color: {r: 0.45763534, g: 1.5363473, b: 6.2434545, a: 0}
+    - _Interior_Position: {r: 0.02, g: -0.16, b: -0.85, a: 0}
+    - _Interior_Position_1: {r: 0.02, g: 0, b: -0.85, a: 0}
     - _Noise_Color: {r: 2.4594646, g: 0.22042364, b: 0.22042364, a: 1}
     - _Noise_Scale: {r: 3, g: 12.95, b: 0, a: 0}
     - _Secondary_Color: {r: 0.8679245, g: 0.113419086, b: 0.061409745, a: 1}
     - _Speed: {r: 0, g: 0.01, b: 0, a: 0}
     - _Stretch_Strength: {r: 27.6, g: 25, b: 0, a: 0}
     - _Third_Color: {r: 4.861732, g: 1.3348725, b: 0.7109136, a: 1}
+    - _World_Position: {r: 0.26, g: 0.44, b: 0.02, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
