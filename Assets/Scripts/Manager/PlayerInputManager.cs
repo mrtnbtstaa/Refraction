@@ -13,7 +13,9 @@ public class PlayerInputManager : MonoBehaviour
     public event Action OnInteractStart;
     public event Action OnInteractEnd;
     public event Action OnLensMode;
+    public event Action OnSwitchColor;
     private float sprintPressTime;
+    private float ePressTime;
     private bool isSprinting;   
     private void Awake()
     {
@@ -69,8 +71,20 @@ public class PlayerInputManager : MonoBehaviour
 
         isSprinting = false;
     }
-    private void HandleInteractStart(InputAction.CallbackContext context) => OnInteractStart?.Invoke();
-    private void HandleInteractEnd(InputAction.CallbackContext context) => OnInteractEnd?.Invoke();
+    private void HandleInteractStart(InputAction.CallbackContext context)
+    {
+        ePressTime = Time.time;
+        OnInteractStart?.Invoke();
+    }
+    private void HandleInteractEnd(InputAction.CallbackContext context)
+    {
+        float pressEDuration = Time.time - ePressTime;
+
+        if (pressEDuration <= 0.2f)
+            OnSwitchColor?.Invoke();
+        else
+            OnInteractEnd?.Invoke(); 
+    }
     public bool IsRunPressed() => isSprinting;
     public bool IsJumpPressed() => inputAction.Player.Jump.triggered;
     private void Subscribe()

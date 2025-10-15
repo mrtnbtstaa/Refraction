@@ -1,0 +1,1 @@
+public enum ColorType {Red = 0, Blue = 1, Green = 2, Violet = 3}

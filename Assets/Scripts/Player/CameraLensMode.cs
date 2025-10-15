@@ -8,7 +8,7 @@ public class CameraLensMode : MonoBehaviour
     public CinemachineCamera vCam;
     private CinemachineRotationComposer rotationComposer;
     public Material scopeLensMaterial;
-    public CanvasGroup scopeCanvasGroup;
+    public Material crosshairMaterial;
     public float normalFOV = 60f;
     public float aimFOV = 30f;
     public float transitionSpeed = 10f;
@@ -16,6 +16,7 @@ public class CameraLensMode : MonoBehaviour
     public Vector3 aimOffset = new Vector3(-2f, 0f, 0f);
     private Vector3 currentAimOffset;
     public bool isLensMode = false;
+    private Coroutine lensCoroutine;
 
     private void Awake()
     {
@@ -24,8 +25,11 @@ public class CameraLensMode : MonoBehaviour
     public void LensModeActivate()
     {
         isLensMode = !isLensMode;
-        StopAllCoroutines();
-        StartCoroutine(SmoothZoomCamera(isLensMode ? aimFOV : normalFOV));
+        // Stop previous transition zoom camera if still running
+        if (lensCoroutine != null)
+            StopCoroutine(lensCoroutine);
+        // Start new transition
+        lensCoroutine = StartCoroutine(SmoothZoomCamera(isLensMode ? aimFOV : normalFOV));
     }
 
     private void Update()
@@ -43,7 +47,7 @@ public class CameraLensMode : MonoBehaviour
         float startFOV = vCam.Lens.FieldOfView;
         float time = 0f;
 
-        float startAlpha = scopeLensMaterial.GetFloat("_Alpha_Threshold"); // Current alpha threshold 
+        float startAlpha = GetFloat(scopeLensMaterial, "_Alpha_Threshold"); // Current alpha threshold 
         float endAlpha = isLensMode ? 1f : 0f;
 
         while (time < zoomDuration)
@@ -52,9 +56,9 @@ public class CameraLensMode : MonoBehaviour
             // Smooth the Fov Zoom
             vCam.Lens.FieldOfView = Mathf.Lerp(startFOV, targetFOV, t);
 
-            // Smooth the Alpha UI(Fade)
-            scopeLensMaterial.SetFloat("_Alpha_Threshold", Mathf.Lerp(startAlpha, endAlpha, t));
-            scopeCanvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
+            // Smooth the Alpha of Shader Materials(Fade)
+            SetFloat("_Alpha_Threshold", Mathf.Lerp(startAlpha, endAlpha, t), scopeLensMaterial);
+            SetFloat("_Alpha_Threshold", Mathf.Lerp(startAlpha, endAlpha, t), crosshairMaterial);
 
             time += Time.deltaTime;
 
@@ -62,10 +66,15 @@ public class CameraLensMode : MonoBehaviour
         }
 
         // To ensure exact FOV at the end
-        vCam.Lens.FieldOfView = targetFOV; 
+        vCam.Lens.FieldOfView = targetFOV;
 
         // To ensure exact alpha at the end
-        scopeLensMaterial.SetFloat("_Alpha_Threshold", endAlpha);
-        scopeCanvasGroup.alpha = endAlpha;
+        SetFloat("_Alpha_Threshold", endAlpha, scopeLensMaterial);
+        SetFloat("_Alpha_Threshold", endAlpha, crosshairMaterial);
     }
+
+
+    private float GetFloat(Material material, string referenceName) => material.GetFloat(referenceName);
+    private void SetFloat(string referenceName, float alpha, Material material) => material.SetFloat(referenceName, alpha); 
+
 }

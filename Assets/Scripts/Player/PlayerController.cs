@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public PlayerEventSubscriber playerEventSubscriber { get; private set; }
     public PlayerInputManager inputManager;
     public UIManager uiManager;
+    public ColorController colorController { get; private set; }
+    public LensController lensController { get; private set; }
     [field: SerializeField] public PlayerMovement playerMovement { get; private set; }
     public PlayerStamina playerStamina { get; private set; }
 
@@ -42,8 +44,7 @@ public class PlayerController : MonoBehaviour
         inputManager = PlayerInputManager.Instance;
         uiManager = UIManager.Instance;
 
-        playerReferences.controller = GetComponent<CharacterController>();
-        cameraLensMode = GetComponent<CameraLensMode>();
+
         playerReferences.cameraTarget = Camera.main.transform;
         playerMovement = new PlayerMovement(playerReferences.controller, playerProperties, playerReferences);
         playerStamina = new PlayerStamina(playerProperties);
@@ -65,6 +66,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        playerReferences.controller = GetComponent<CharacterController>();
+        cameraLensMode = GetComponent<CameraLensMode>();
+        colorController = GetComponent<ColorController>();
+        lensController = GetComponent<LensController>();
         Cursor.lockState = CursorLockMode.Locked;
         changeState.InitialState(idleState);
     }

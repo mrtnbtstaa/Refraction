@@ -55,6 +55,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha_Threshold: 1
     - _Cell_Density: 3.96
     - _Noise_Scale: 40.5
     - _Noise_Strength: 0.22
@@ -62,7 +63,7 @@ Material:
     - _QueueOffset: 0
     - _Speed: 0.46
     m_Colors:
-    - _Base_Color: {r: 0, g: 9.887785, b: 118.0354, a: 1}
+    - _Base_Color: {r: 121.45615, g: 191.74904, b: 0, a: 0}
     - _Secondary_Color: {r: 190.37523, g: 0, b: 220.26175, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

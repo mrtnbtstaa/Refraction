@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class PlayerEventHandler
 {
+    private int index = 0;
     private TransitionState changeState;
     private PlayerController playerController;
     private PlayerProperties playerProperties;
@@ -69,11 +71,17 @@ public class PlayerEventHandler
         }
 
     }
-    
+
     public void HandleLensModeToggle()
     {
         Debug.Log("Handle Lens Mode Activated!");
         playerController.cameraLensMode.LensModeActivate();
+    }
+    public void HandleSwitchColor()
+    {
+        index = playerController.colorController.GetCurrentIndex(index);
+        playerController.colorController.UpdateColor(index);
+        playerController.lensController.UpdateColor(index);
     }
 
 }
